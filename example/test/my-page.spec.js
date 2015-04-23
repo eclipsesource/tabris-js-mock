@@ -1,4 +1,5 @@
 var ClientMock = require("../../src/tabris-client-mock.js");
+var tabris = require("tabris");
 var myPage = require("../src/my-page.js");
 
 var RED = "rgba(255, 0, 0, 1)";
@@ -9,7 +10,7 @@ describe("my-page", function() {
   var page, label, input;
 
   beforeEach(function() {
-    client = new ClientMock().start();
+    client = new ClientMock().start(tabris);
     page = myPage.create();
     label = page.find("#serial-label").first();
     input = page.find("TextInput").first();

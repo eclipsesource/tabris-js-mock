@@ -78,7 +78,7 @@ ClientWrapper.prototype = {
     return this._client.objects[widget.cid];
   },
 
-  start: function() {
+  start: function(tabris) {
     tabris._init(this._client);
     return this;
   }
