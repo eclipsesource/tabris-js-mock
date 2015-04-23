@@ -1,6 +1,6 @@
 {
   "name": "tabris-js-mock",
-  "version": "0.9.4",
+  "version": "0.1.0",
   "license": "BSD-3-Clause",
   "homepage": "http://tabrisjs.com/",
   "repository": {
@@ -9,7 +9,7 @@
   },
   "main": "example/src/main.js",
   "dependencies": {
-    "tabris": "^0.9.4"
+    "tabris": "^1.0.0"
   },
   "devDependencies": {
     "grunt": "^0.4.5",

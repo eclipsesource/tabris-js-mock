@@ -18,25 +18,25 @@ describe("my-page", function() {
   describe("text input", function() {
 
     it("does not color label", function() {
-      expect(label.get("foreground")).not.toBe(RED);
+      expect(label.get("textColor")).not.toBe(RED);
     });
 
     it("colors label on illegal input", function() {
       client.widget(input).append("foo");
 
-      expect(label.get("foreground")).toBe(RED);
+      expect(label.get("textColor")).toBe(RED);
     });
 
     it("does not color label on legal input", function() {
       client.widget(input).append("123");
 
-      expect(label.get("foreground")).not.toBe(RED);
+      expect(label.get("textColor")).not.toBe(RED);
     });
 
     it("resets label color on clear", function() {
       client.widget(input).append("foo").clear();
 
-      expect(label.get("foreground")).not.toBe(RED);
+      expect(label.get("textColor")).not.toBe(RED);
     });
 
   });
