@@ -23,19 +23,20 @@ describe("my-page", function() {
     });
 
     it("colors label on illegal input", function() {
-      client.widget(input).append("foo");
+      input.trigger("input", input, "foo");
 
       expect(label.get("textColor")).toBe(RED);
     });
 
     it("does not color label on legal input", function() {
-      client.widget(input).append("123");
+      input.trigger("input", input, "123");
 
       expect(label.get("textColor")).not.toBe(RED);
     });
 
     it("resets label color on clear", function() {
-      client.widget(input).append("foo").clear();
+      input.trigger("input", input, "123");
+      input.trigger("input", input, "");
 
       expect(label.get("textColor")).not.toBe(RED);
     });

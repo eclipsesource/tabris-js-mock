@@ -15,9 +15,8 @@ exports.create = function() {
 
   tabris.create("TextInput", {
     layoutData: {left: ["#serial-label", 8], right: 16, baseline: "#serial-label"},
-  }).on("input", function() {
-    var text = this.get("text").trim();
-    var isValid = text === "" || validator.validSerialNr(text);
+  }).on("input", function(widget, text) {
+    var isValid = text.trim() === "" || validator.validSerialNr(text.trim());
     page.children("#serial-label").set("textColor", isValid ? "initial" : "red");
   }).appendTo(page);
 

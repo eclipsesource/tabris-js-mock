@@ -6,24 +6,11 @@ if (typeof window === "undefined") {
 
 require("tabris");
 
-var types = {};
-
 var ClientObjectMock = function(cid) {
   this.cid = cid;
   this._proxy = tabris._proxies[cid];
   this.type = this._proxy.type;
   this._props = {};
-  if (this.type in types) {
-    var bot = types[this.type];
-    if ("init" in bot) {
-      bot.init.call(this);
-    }
-    if ("methods" in bot) {
-      for(var method in bot.methods) {
-        this[method] = bot.methods[method];
-      }
-    }
-  }
 };
 
 var ClientMock = function() {
@@ -73,11 +60,6 @@ var ClientWrapper = function() {
 
 ClientWrapper.prototype = {
 
-  widget: function(widget) {
-    tabris.trigger("flush");
-    return this._client.objects[widget.cid];
-  },
-
   start: function(tabris) {
     tabris._init(this._client);
     return this;
@@ -86,34 +68,3 @@ ClientWrapper.prototype = {
 };
 
 module.exports = ClientWrapper;
-
-var registerType = exports.registerType = function(type, methods) {
-  types[type] = methods;
-};
-
-registerType("TextInput", {
-  init: function() {
-    this._props.text = "";
-    this._props.foreground = [0, 0, 0, 255];
-    this._props.background = [255, 255, 255, 255];
-  },
-  methods: {
-    append: function(text) {
-      this._props.text += text;
-      tabris._notify(this.cid, "modify", {text: text});
-      return this;
-    },
-    clear: function() {
-      this._props.text = "";
-      tabris._notify(this.cid, "modify", {text: ""});
-      return this;
-    }
-  }
-});
-
-registerType("TextView", {
-  init: function() {
-    this._props.foreground = [0, 0, 0, 255];
-    this._props.background = [255, 255, 255, 255];
-  }
-});
